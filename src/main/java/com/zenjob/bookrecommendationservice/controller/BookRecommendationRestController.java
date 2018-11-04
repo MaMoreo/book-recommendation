@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +28,8 @@ import com.zenjob.bookrecommendationservice.model.Book;
 import com.zenjob.bookrecommendationservice.model.BookService;
 import com.zenjob.bookrecommendationservice.repository.RecommendationRepository;
 import com.zenjob.bookrecommendationservice.repository.UserRepository;
+
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
 @RestController
 @RequestMapping("/recommendations")
@@ -52,12 +55,17 @@ public class BookRecommendationRestController {
 	/**
 	 * Gets /recommendations/{userName}
 	 * 
-	 * @return The user if found, raises and exception otherwise
+	 * @return The user and links in HATEOAS format if found <br>
+	 * , raises and exception otherwise
 	 */
 	@GetMapping(value = "/{userName}")
-	User getUser(@PathVariable String userName) {
-		return userRepository.findByUsername(userName)
+	Resource<User> getUser(@PathVariable String userName) {
+		User user = userRepository.findByUsername(userName)
 				.orElseThrow(() -> new UserNotFoundException(userName));
+		
+		return new Resource<>(user,
+				linkTo(methodOn(BookRecommendationRestController.class).getUser(userName)).withSelfRel(),
+				linkTo(methodOn(BookRecommendationRestController.class).getAllUsers()).withRel("users"));
 	}
 
 	/**
