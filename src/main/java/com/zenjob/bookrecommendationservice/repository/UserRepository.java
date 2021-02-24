@@ -2,7 +2,7 @@ package com.zenjob.bookrecommendationservice.repository;
 
 import java.util.Optional;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
 import com.zenjob.bookrecommendationservice.entity.User;
 
@@ -11,7 +11,7 @@ import com.zenjob.bookrecommendationservice.entity.User;
  * 
  * @author Miguel Moreo
  */
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends CrudRepository<User, Long> {
 
 	/**
 	 * Custom finder-method. It creates a JPA query of the form "select a from
