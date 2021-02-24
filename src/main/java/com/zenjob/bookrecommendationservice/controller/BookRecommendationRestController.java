@@ -59,28 +59,37 @@ public class BookRecommendationRestController {
 	}
 
 	/**
-	 * Gets /recommendations/{userName}
+	 * Version 2: with Hateoas (Not working)
 	 * 
-	 * @return The user and links in HATEOAS format if found <br>
-	 * , raises and exception otherwise
+	 * @throws UserNotFoundException
+	 * @return The user and links in HATEOAS format if found, <br>
+	 * raises and exception otherwise
 	 */
-	@GetMapping(value = "/{userName}")
-	Resource<User> getUser(@PathVariable String userName) {
-		User user = userRepository.findByUsername(userName)
+	@GetMapping("v2/users/{username}")
+	public Resource<User> getUserHateoas(@PathVariable(name = "username") String userName) {
+		User user = userService.findUser(userName)
 				.orElseThrow(() -> new UserNotFoundException(userName));
 		
 		return new Resource<>(user,
-				linkTo(methodOn(BookRecommendationRestController.class).getUser(userName)).withSelfRel(),
-				linkTo(methodOn(BookRecommendationRestController.class).getAllUsers()).withRel("users"));
+				linkTo(methodOn(BookRecommendationRestController.class).getUser(userName)).withSelfRel()
+				,linkTo(methodOn(BookRecommendationRestController.class).getAllUsers()).withRel("users"));
 	}
 
+	
+	@GetMapping("v1/users/{username}")
+	public User getUser(@PathVariable(name = "username") String userName) {
+		return userService.findUser(userName)
+				.orElseThrow(() -> new UserNotFoundException(userName));
+	}
+	
 	/**
 	 * Creates a user. Replies to recommendations/{userName} (POST)
 	 * 
 	 * @return the created entity if any
 	 */
-	@PostMapping
-	ResponseEntity<?> createUser(@RequestParam String userName) {
+	@PostMapping("/users")
+	public ResponseEntity<?> createUser(@RequestParam String userName) {
+		
 		userRepository.findByUsername(userName)
 			.ifPresent(value -> {
 				throw(new UserDuplicatedException(value.getUsername()));
