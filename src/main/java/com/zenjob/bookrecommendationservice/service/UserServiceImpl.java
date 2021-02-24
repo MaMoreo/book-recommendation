@@ -1,6 +1,8 @@
 package com.zenjob.bookrecommendationservice.service;
 
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +22,17 @@ public class UserServiceImpl implements UserService {
 	
 	
 	@Override
-	public Collection<User> getAllUsers() {
-		return userRepository.findAll();
+	public List<User> getAllUsers() {
+		Iterable<User> all = userRepository.findAll();
+		List<User> result = new ArrayList<>();
+	    all.forEach(result::add);
+	    return result;
+	}
+
+
+	@Override
+	public Optional<User> findUser(String userName) {
+		return userRepository.findByUsername(userName);
 	}
 
 }
