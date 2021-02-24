@@ -7,7 +7,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.zenjob.bookrecommendationservice.entity.Recommendation;
 import com.zenjob.bookrecommendationservice.entity.User;
 import com.zenjob.bookrecommendationservice.repository.RecommendationRepository;
 import com.zenjob.bookrecommendationservice.repository.UserRepository;
@@ -34,15 +33,15 @@ public class BookRecommendationServiceApplication {
 	 *            Spring will inject this automatically
 	 * @return
 	 */
-	/*@Bean
+	@Bean
 	CommandLineRunner init(UserRepository userRepository, RecommendationRepository recommedationRepository) {
 		// CommandLineRunner runner = (String [] evt) -> body of the run method
 		// parameter of the run method -> body of the run method
-		return (evt) -> Arrays.asList("steve, peter, bruce, clark, rwinch, mfisher, mpollack, jlong".split(","))
+		return (evt) -> Arrays.asList("steve,peter,bruce, clark, felicia, maryjane, diana, eddie".replaceAll("\s", "").split(","))
 				.forEach(a -> {
-					User user = userRepository.save(new User(a, "password"));
-					recommedationRepository.save(new Recommendation(user, "http://bookmark.com/1/" + a, "A description"));
-					recommedationRepository.save(new Recommendation(user, "http://bookmark.com/2/" + a, "A description"));
+					User user = userRepository.save(new User(a));
+					//recommedationRepository.save(new Recommendation(user, "http://bookmark.com/1/" + a, "A description"));
+					//recommedationRepository.save(new Recommendation(user, "http://bookmark.com/2/" + a, "A description"));
 				});
-	}*/
+	}
 }
