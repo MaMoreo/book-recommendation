@@ -18,15 +18,16 @@ public class User {
 	@GeneratedValue
 	private Long id;
 
+	private String username;
+
 	/**
 	 *  mappedBy indicates the entity is the
 	 *  inverse of the
 	 *  relationship
 	 */
 	@OneToMany(mappedBy = "user") 
-	private Set<Recommendation> recommendations = new HashSet<Recommendation>(); 
+	private Set<Recommendation> recommendations = new HashSet<>(); 
 														
-	private String username;
 
 	/**
 	 * Default Constructor for JPA
