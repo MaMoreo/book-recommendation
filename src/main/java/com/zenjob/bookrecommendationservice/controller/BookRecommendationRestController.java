@@ -1,5 +1,8 @@
 package com.zenjob.bookrecommendationservice.controller;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+
 import java.net.URI;
 import java.util.Collection;
 import java.util.List;
@@ -28,8 +31,7 @@ import com.zenjob.bookrecommendationservice.model.Book;
 import com.zenjob.bookrecommendationservice.model.BookService;
 import com.zenjob.bookrecommendationservice.repository.RecommendationRepository;
 import com.zenjob.bookrecommendationservice.repository.UserRepository;
-
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
+import com.zenjob.bookrecommendationservice.service.UserService;
 
 @RestController
 @RequestMapping("/recommendations")
@@ -41,15 +43,19 @@ public class BookRecommendationRestController {
 	private UserRepository userRepository;
 	@Autowired
 	private BookService bookService;
+	@Autowired 
+	private UserService userService;
 
+	
+	
 	/**
 	 * Gets all the users:
 	 * 
 	 * @return A collection with all the users
 	 */
-	@GetMapping
-	Collection<User> getAllUsers() {
-		return userRepository.findAll();
+	@GetMapping("/users")
+	public Collection<User> getAllUsers() {
+		return userService.getAllUsers();
 	}
 
 	/**
