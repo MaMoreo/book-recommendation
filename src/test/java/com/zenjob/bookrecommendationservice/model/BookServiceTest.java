@@ -9,7 +9,7 @@ import org.junit.Test;
 
 public class BookServiceTest {
 	
-	private static final int N_BOOKS = 20;
+	private final int N_BOOKS = 20;
 
 	/**
 	 * Test method for
