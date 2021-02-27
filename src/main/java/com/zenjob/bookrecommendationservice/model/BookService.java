@@ -31,10 +31,11 @@ public class BookService {
 	 * @param n the number of books to retrieve
 	 */
 	public Set<Book> getNBooks(Integer n) {
-		Set<Book> nRandomBooks = new HashSet<Book>();
-		for (int i = 0; i < n; i++) {
+		Set<Book> nRandomBooks = new HashSet<>();
+		do {
 			nRandomBooks.add(books.get(getRandomNumber()));
-		}
+		} while(nRandomBooks.size() < n);
+		
 		return nRandomBooks;
 	}
 
