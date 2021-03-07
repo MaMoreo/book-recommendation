@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 
 import java.util.Set;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class BookServiceTest {
@@ -16,6 +17,7 @@ public class BookServiceTest {
 	 * {@link com.zenjob.bookrecommendationservice.model.BookService.getNBooks(Integer)}.
 	 */
 	@Test
+	@Ignore
 	public void getNBooksTest() {
 		BookService bs = new BookService();
 		Set<Book> nBooks = bs.getNBooks(N_BOOKS);
