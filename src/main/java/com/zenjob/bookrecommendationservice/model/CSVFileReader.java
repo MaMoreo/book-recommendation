@@ -26,9 +26,9 @@ public class CSVFileReader {
 	/**
 	 * Constructor
 	 */
-	public CSVFileReader() {
+	/*public CSVFileReader() {
 		// init();
-	}
+	}*/
 
 	/**
 	 * Initializes the Logger.
@@ -54,9 +54,9 @@ public class CSVFileReader {
 	 *         An {@code Empty List} is the file does not exist.
 	 */
 	public List<Book> processBooks(String filePath) {
-		List<Book> books = new ArrayList<Book>();
+		List<Book> books = new ArrayList<>();
 		try (Stream<String> lines = Files.lines(Paths.get(filePath))) {   //reads the whole file
-			books = lines.sorted()  //FIXME: this is  NOT true, how this works?
+			books = lines//.sorted()  //FIXME: this is  NOT true, how this works?
 					.skip(1) //first one is the headers line
 					.map(mapToBook)
 					.collect(Collectors.toList());

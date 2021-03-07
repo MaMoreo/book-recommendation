@@ -8,7 +8,6 @@ import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -18,14 +17,13 @@ import org.junit.Test;
 public class CsvFileReaderTest {
 
 	// ASIN;Title;Author;Genre
-	private String bookFile = "src\\test\\resources\\books.csv";
+	private String bookFile = "src/test/resources/books.csv";
 
 	/**
 	 * Test method for
 	 * {@link com.zenjob.bookrecommendationservice.model.CSVFileReader#processBooks(String)}.
 	 */
 	@Test
-	@Ignore
 	public void processBooksTest() {
 		CSVFileReader fileReader = new CSVFileReader();
 		List<Book> books = fileReader.processBooks(bookFile);
