@@ -19,9 +19,15 @@ public class BookService {
 		init();
 	}
 
+	public BookService(String bookFile) {
+		this.bookFile = bookFile;
+		init();
+	}
+	
+	
 	// Loads the books in memory
 	private void init() {
-		CSVFileReader bookReader = new CSVFileReader();
+		CSVFileReader bookReader = new CSVFileReader();  //FIXME: use a Bean here!!
 		books = bookReader.processBooks(bookFile);
 	}
 
