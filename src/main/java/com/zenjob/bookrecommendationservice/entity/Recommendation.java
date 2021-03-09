@@ -22,7 +22,7 @@ public class Recommendation {
 	private User user;
 
 	private String book;   // FIXME: make this a book ?
-	private Feedback feedback; // FIXME: change this with an Enum 
+	private Feedback feedback; 
 
 	Recommendation() { // JPA Only
 	}
