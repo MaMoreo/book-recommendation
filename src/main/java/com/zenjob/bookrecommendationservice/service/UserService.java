@@ -8,7 +8,6 @@ import com.zenjob.bookrecommendationservice.entity.User;
 public interface UserService {
 
 	Collection<User> getAllUsers();
-
 	Optional<User> findUser(String userName);
-
+	User createUser(String userName);
 }
