@@ -1,13 +1,13 @@
 package com.zenjob.bookrecommendationservice.model;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.Set;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class BookServiceTest {
+class BookServiceTest {
 
 	private final int N_BOOKS = 20;
 
@@ -19,7 +19,7 @@ public class BookServiceTest {
 	 * {@link com.zenjob.bookrecommendationservice.model.BookService.getNBooks(Integer)}.
 	 */
 	@Test
-	public void getNBooksTest() {
+	void getNBooksTest() {
 		BookService bs = new BookService(bookFile);
 		Set<Book> nBooks = bs.getNBooks(N_BOOKS);
 		assertNotNull(nBooks);
