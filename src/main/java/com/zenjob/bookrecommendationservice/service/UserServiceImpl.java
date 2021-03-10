@@ -9,18 +9,17 @@ import org.springframework.stereotype.Service;
 
 import com.zenjob.bookrecommendationservice.entity.User;
 import com.zenjob.bookrecommendationservice.exception.UserDuplicatedException;
-import com.zenjob.bookrecommendationservice.model.BookService;
 import com.zenjob.bookrecommendationservice.repository.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
 
 	private final UserRepository userRepository;
-	private final BookService bookService;
+	private final BookServiceImpl bookService;
 	
 
 	@Autowired
-	public UserServiceImpl(UserRepository userRepository, BookService bookService) {
+	public UserServiceImpl(UserRepository userRepository, BookServiceImpl bookService) {
 		this.userRepository = userRepository;
 		this.bookService = bookService;
 	}

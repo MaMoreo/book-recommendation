@@ -17,6 +17,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.zenjob.bookrecommendationservice.entity.Feedback;
 import com.zenjob.bookrecommendationservice.entity.User;
 import com.zenjob.bookrecommendationservice.exception.UserNotFoundException;
+import com.zenjob.bookrecommendationservice.model.Book;
+import com.zenjob.bookrecommendationservice.service.BookService;
 import com.zenjob.bookrecommendationservice.service.RecommendationService;
 import com.zenjob.bookrecommendationservice.service.UserService;
 
@@ -26,11 +28,13 @@ public class BookRecommendationRestController {
 
 	private final RecommendationService recommendationService;
 	private final UserService userService;
+	private final BookService bookService;
 
-	public BookRecommendationRestController(RecommendationService recommendationService, UserService userService) {
+	public BookRecommendationRestController(RecommendationService recommendationService, UserService userService, BookService bookService) {
 		super();
 		this.recommendationService = recommendationService;
 		this.userService = userService;
+		this.bookService = bookService;
 	}
 
 	/**
@@ -41,6 +45,12 @@ public class BookRecommendationRestController {
 	@GetMapping("/users")
 	public Collection<User> getAllUsers() {
 		return userService.getAllUsers();
+	}
+	
+	
+	@GetMapping("/books")
+	public Collection<Book> getAllBooks() {
+		return bookService.getAllBooks();
 	}
 
 	/**

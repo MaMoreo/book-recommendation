@@ -13,15 +13,16 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * This Class reads the CVS file
+ * Reads the CVS file
  * 
  * @author Miguel Moreo
  */
 public class CSVFileReader {
 
 	private static final String SEMICOLON = ";";
-	private final static Logger LOGGER = Logger.getLogger(CSVFileReader.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(CSVFileReader.class.getName());  // use Annotattion here!
 	private static FileHandler fileHandler;
+	private static final String FILE_PATH = "src/main/resources/data/books.csv";   // FIXME: parameter in application properties
 
 	/**
 	 * Constructor
@@ -45,6 +46,11 @@ public class CSVFileReader {
 		LOGGER.setUseParentHandlers(false);
 	}
 
+	
+	public List<Book> processBooks() {
+		return processBooks(FILE_PATH);
+	}
+	
 	/**
 	 * Reads the books file. A CSV File containing the books
 	 * with the following info: ANSI, Title, Author, Genre.
