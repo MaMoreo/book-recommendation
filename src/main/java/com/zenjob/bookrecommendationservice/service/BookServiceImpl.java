@@ -1,5 +1,7 @@
-package com.zenjob.bookrecommendationservice.model;
+package com.zenjob.bookrecommendationservice.service;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -8,28 +10,37 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.stereotype.Service;
 
+import com.zenjob.bookrecommendationservice.model.Book;
+import com.zenjob.bookrecommendationservice.repository.BookRepository;
+
 
 @Service
-public class BookService {
+public class BookServiceImpl implements BookService{
 
-	private String bookFile = "src\\main\\resources\\data\\books.csv"; // FIXME: parameter in builder?
+	//private String bookFile = "src\\main\\resources\\data\\books.csv"; 
 	private List<Book> books;
+	private final BookRepository bookRepository;
 
-	public BookService() {
+	/*public BookServiceImpl() {
 		init();
-	}
+	}*/
 
-	public BookService(String bookFile) {
+	/*public BookServiceImpl(String bookFile) {
 		this.bookFile = bookFile;
 		init();
+	}*/
+	
+	
+	public BookServiceImpl(BookRepository bookRepository) {
+		super();
+		this.bookRepository = bookRepository;
 	}
-	
-	
+
 	// Loads the books in memory
-	private void init() {
+	/*private void init() {
 		CSVFileReader bookReader = new CSVFileReader();  //FIXME: use a Bean here!!
 		books = bookReader.processBooks(bookFile);
-	}
+	}*/
 
 	/**
 	 * Returns n books, duplicates are not allowed
@@ -62,5 +73,13 @@ public class BookService {
 				.map(Book::getAsin)
 				.filter(a -> a.equals(asin))
 				.findFirst();
+	}
+
+	@Override
+	public Collection<Book> getAllBooks() {
+		Iterable<Book> all = bookRepository.findAll();
+		List<Book> result = new ArrayList<>();
+		all.forEach(result::add);
+		return result;
 	}
 }
