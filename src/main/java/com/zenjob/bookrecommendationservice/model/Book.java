@@ -1,5 +1,10 @@
 package com.zenjob.bookrecommendationservice.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import lombok.Data;
 
 /**
@@ -7,12 +12,21 @@ import lombok.Data;
  *
  * @author Miguel Moreo
  */
+@Entity
 @Data
 public class Book {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
 	private String asin;   //FIXME: number?
 	private String title;
 	private String author; //FIXME what about several authors ?
 	private String genre;
+	
+	Book() { // JPA Only
+	}
 	
 	public Book withAsin(String asin){
 		this.setAsin(asin);
