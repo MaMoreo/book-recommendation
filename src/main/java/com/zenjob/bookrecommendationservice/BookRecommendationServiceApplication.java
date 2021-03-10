@@ -1,15 +1,7 @@
 package com.zenjob.bookrecommendationservice;
 
-import java.util.Arrays;
-
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-
-import com.zenjob.bookrecommendationservice.entity.User;
-import com.zenjob.bookrecommendationservice.repository.RecommendationRepository;
-import com.zenjob.bookrecommendationservice.repository.UserRepository;
 
 @SpringBootApplication
 public class BookRecommendationServiceApplication {
@@ -17,6 +9,7 @@ public class BookRecommendationServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BookRecommendationServiceApplication.class, args);
 	}
+	
 	
 	/**
 	 * Once started, Spring Boot will call all beans of type CommandLineRunner,
@@ -33,15 +26,18 @@ public class BookRecommendationServiceApplication {
 	 *            Spring will inject this automatically
 	 * @return
 	 */
-	@Bean
+	/*@Bean
 	CommandLineRunner init(UserRepository userRepository, RecommendationRepository recommedationRepository) {
-		// CommandLineRunner runner = (String [] evt) -> body of the run method
-		// parameter of the run method -> body of the run method
-		return (evt) -> Arrays.asList("steve,peter,bruce, clark, felicia, maryjane, diana, eddie".replaceAll("\\s", "").split(","))
-				.forEach(a -> {
-					User user = userRepository.save(new User(a));
-					//recommedationRepository.save(new Recommendation(user, "http://bookmark.com/1/" + a, "A description"));
-					//recommedationRepository.save(new Recommendation(user, "http://bookmark.com/2/" + a, "A description"));
-				});
-	}
+		// CommandLineRunner runner = (String [] evt) -> // body of the run method
+				// parameter of the run method -> body of the run method
+				return (evt) -> 
+				
+						Arrays.asList("steve,peter,bruce, clark, felicia, maryjane, diana, eddie".replaceAll("\\s", "").split(","))
+						.forEach(a -> {
+							User user = userRepository.save(new User(a));
+							//recommedationRepository.save(new Recommendation(user, "http://bookmark.com/1/" + a, "A description"));
+							//recommedationRepository.save(new Recommendation(user, "http://bookmark.com/2/" + a, "A description"));
+						}
+						);
+	}*/
 }
