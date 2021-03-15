@@ -3,6 +3,7 @@ package com.zenjob.bookrecommendationservice.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -19,15 +20,18 @@ public class Recommendation {
 
 	@JsonIgnore
 	@ManyToOne
+	@JoinColumn(name = "user_id") 
 	private User user;
 
-	private String book;   // FIXME: make this a book ?
+	@ManyToOne
+	@JoinColumn(name = "book_id")
+	private Book book;   
 	private Feedback feedback; 
 
 	Recommendation() { // JPA Only
 	}
 
-	public Recommendation(User user, String book) {
+	public Recommendation(User user, Book book) {
 		this.user = user;
 		this.book = book;
 	}

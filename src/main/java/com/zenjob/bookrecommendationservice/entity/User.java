@@ -8,10 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import lombok.Getter;
+import lombok.Data;
 
 @Entity
-@Getter
+@Data
 public class User {
 
 	@Id
@@ -25,7 +25,7 @@ public class User {
 	 *  inverse of the
 	 *  relationship
 	 */
-	@OneToMany(mappedBy = "user") 
+	@OneToMany(mappedBy = "user")
 	private Set<Recommendation> recommendations = new HashSet<>(); 
 														
 
