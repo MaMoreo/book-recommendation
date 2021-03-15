@@ -20,15 +20,15 @@ public class Book {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String asin;   //FIXME: number?
+	private Long asin;   //FIXME: number?
 	private String title;
-	private String author; //FIXME what about several authors ?
+	private String author; 
 	private String genre;
 	
 	Book() { // JPA Only
 	}
 	
-	public Book withAsin(String asin){
+	public Book withAsin(Long asin){
 		this.setAsin(asin);
 		return this;
 	}
