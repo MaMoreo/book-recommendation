@@ -17,20 +17,9 @@ import com.zenjob.bookrecommendationservice.repository.BookRepository;
 @Service
 public class BookServiceImpl implements BookService{
 
-	//private String bookFile = "src\\main\\resources\\data\\books.csv"; 
-	private List<Book> books;
 	private final BookRepository bookRepository;
+	private int totalBooks = 1099;
 
-	/*public BookServiceImpl() {
-		init();
-	}*/
-
-	/*public BookServiceImpl(String bookFile) {
-		this.bookFile = bookFile;
-		init();
-	}*/
-	
-	
 	public BookServiceImpl(BookRepository bookRepository) {
 		super();
 		this.bookRepository = bookRepository;
@@ -50,7 +39,9 @@ public class BookServiceImpl implements BookService{
 	public Set<Book> getNBooks(Integer n) {
 		Set<Book> nRandomBooks = new HashSet<>();
 		do {
-			nRandomBooks.add(books.get(getRandomNumber()));
+			Optional<Book> book = bookRepository.findById(getRandomNumber());
+			if(book.isPresent())
+				nRandomBooks.add(book.get());
 		} while(nRandomBooks.size() < n);
 		
 		return nRandomBooks;
@@ -58,8 +49,8 @@ public class BookServiceImpl implements BookService{
 
 	// nextInt is normally exclusive of the top value,
 	// so add 1 to make it inclusive
-	private Integer getRandomNumber() {
-		return ThreadLocalRandom.current().nextInt(0, books.size() + 1);
+	private Long getRandomNumber() {
+		return ThreadLocalRandom.current().nextLong(0, totalBooks); //FIXME: this is hardcoded now
 	}
 	
 	/**
@@ -68,12 +59,12 @@ public class BookServiceImpl implements BookService{
 	 * @param asin
 	 * @return
 	 */
-	public Optional<String> findBookByAsin(String asin) {
+	/*public Optional<Book> findBookByAsin(Long asin) {
 		return books.stream()
-				.map(Book::getAsin)
-				.filter(a -> a.equals(asin))
+				//.map(Book::getAsin)
+				.filter(b -> b.equals(asin))
 				.findFirst();
-	}
+	}*/
 
 	@Override
 	public Collection<Book> getAllBooks() {
