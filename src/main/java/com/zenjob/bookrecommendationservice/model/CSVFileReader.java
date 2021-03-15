@@ -6,22 +6,22 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
-import java.util.logging.FileHandler;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Reads the CVS file
  * 
  * @author Miguel Moreo
  */
+@Slf4j
 public class CSVFileReader {
 
 	private static final String SEMICOLON = ";";
-	private static final Logger LOGGER = Logger.getLogger(CSVFileReader.class.getName());  // use Annotattion here!
-	private static FileHandler fileHandler;
+	//private static final Logger LOGGER = Logger.getLogger(CSVFileReader.class.getName());  // use Annotation here!
+	//private static FileHandler fileHandler;
 	private static final String FILE_PATH = "src/main/resources/data/books.csv";   // FIXME: parameter in application properties
 
 	/**
@@ -34,7 +34,7 @@ public class CSVFileReader {
 	/**
 	 * Initializes the Logger.
 	 */
-	private void init() {
+	/*private void init() {
 		try {
 			fileHandler = new FileHandler(".\\logs\\out.log");  // FIXME: does not work
 			LOGGER.addHandler(fileHandler);
@@ -44,7 +44,7 @@ public class CSVFileReader {
 			e.printStackTrace();
 		}
 		LOGGER.setUseParentHandlers(false);
-	}
+	}*/
 
 	
 	public List<Book> processBooks() {
@@ -68,7 +68,7 @@ public class CSVFileReader {
 					.collect(Collectors.toList());
 		} catch (IOException ioe) {
 			// We log the error in the line, but continue with the processing.
-			LOGGER.severe("IOException occurred when reading the file " + filePath + " exiting");
+			log.error("IOException occurred when reading the file " + filePath + " exiting");
 		}
 		return books;
 	}
@@ -79,7 +79,7 @@ public class CSVFileReader {
 	private Function<String, Book> mapToBook = (line) -> {
 		String[] p = line.split(SEMICOLON);// CSV has semicolon separated lines
 		Book book = new Book()
-				.withAsin(p[0])   //		book.setAsIN(Integer.parseInt(p[0]));
+				.withAsin(Long.parseLong(p[0]))   //		book.setAsIN(Integer.parseInt(p[0]));
 				.withTitle(p[1])
 				.withAuthor(p[2])
 				.withGenre(p[3]);
