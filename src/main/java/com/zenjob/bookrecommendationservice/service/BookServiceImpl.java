@@ -25,17 +25,7 @@ public class BookServiceImpl implements BookService{
 		this.bookRepository = bookRepository;
 	}
 
-	// Loads the books in memory
-	/*private void init() {
-		CSVFileReader bookReader = new CSVFileReader();  //FIXME: use a Bean here!!
-		books = bookReader.processBooks(bookFile);
-	}*/
-
-	/**
-	 * Returns n books, duplicates are not allowed
-	 * 
-	 * @param n the number of books to retrieve
-	 */
+	@Override
 	public Set<Book> getNBooks(Integer n) {
 		Set<Book> nRandomBooks = new HashSet<>();
 		do {
@@ -47,7 +37,7 @@ public class BookServiceImpl implements BookService{
 		return nRandomBooks;
 	}
 
-	// nextInt is normally exclusive of the top value,
+	// nextInt is normally exclusive of the top value,  // TODO: check if you can get the last element
 	// so add 1 to make it inclusive
 	private Long getRandomNumber() {
 		return ThreadLocalRandom.current().nextLong(0, totalBooks); //FIXME: this is hardcoded now

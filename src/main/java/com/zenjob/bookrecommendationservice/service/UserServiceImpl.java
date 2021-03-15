@@ -19,12 +19,12 @@ import com.zenjob.bookrecommendationservice.repository.UserRepository;
 public class UserServiceImpl implements UserService {
 
 	private final UserRepository userRepository;
-	private final BookServiceImpl bookService;
+	private final BookService bookService;
 	private final RecommendationService recommendationService;
 	
 
 	@Autowired
-	public UserServiceImpl(UserRepository userRepository, BookServiceImpl bookService, RecommendationService recommendationService ) {
+	public UserServiceImpl(UserRepository userRepository, BookService bookService, RecommendationService recommendationService ) {
 		this.userRepository = userRepository;
 		this.bookService = bookService;
 		this.recommendationService = recommendationService;
