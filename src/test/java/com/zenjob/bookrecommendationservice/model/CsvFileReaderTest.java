@@ -11,11 +11,13 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import com.zenjob.bookrecommendationservice.entity.Book;
+
 /**
  * @author Miguel Moreo
  *
  */
-public class CsvFileReaderTest {
+class CsvFileReaderTest {
 
 	// ASIN;Title;Author;Genre
 	private String bookFile = "src/test/resources/books.csv";
@@ -25,7 +27,7 @@ public class CsvFileReaderTest {
 	 * {@link com.zenjob.bookrecommendationservice.model.CSVFileReader#processBooks(String)}.
 	 */
 	@Test
-	public void processBooksTest() {
+	void processBooksTest() {
 		CSVFileReader fileReader = new CSVFileReader();
 		List<Book> books = fileReader.processBooks(bookFile);
 		assertNotNull(books);

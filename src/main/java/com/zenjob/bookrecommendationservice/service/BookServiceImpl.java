@@ -10,7 +10,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.stereotype.Service;
 
-import com.zenjob.bookrecommendationservice.model.Book;
+import com.zenjob.bookrecommendationservice.entity.Book;
 import com.zenjob.bookrecommendationservice.repository.BookRepository;
 
 

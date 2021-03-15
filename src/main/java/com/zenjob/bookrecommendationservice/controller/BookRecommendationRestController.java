@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.zenjob.bookrecommendationservice.command.UserDTO;
+import com.zenjob.bookrecommendationservice.entity.Book;
 import com.zenjob.bookrecommendationservice.entity.Feedback;
 import com.zenjob.bookrecommendationservice.entity.User;
 import com.zenjob.bookrecommendationservice.exception.UserNotFoundException;
-import com.zenjob.bookrecommendationservice.model.Book;
 import com.zenjob.bookrecommendationservice.service.BookService;
 import com.zenjob.bookrecommendationservice.service.RecommendationService;
 import com.zenjob.bookrecommendationservice.service.UserService;

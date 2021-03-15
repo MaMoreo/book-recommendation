@@ -1,4 +1,4 @@
-package com.zenjob.bookrecommendationservice.model;
+package com.zenjob.bookrecommendationservice.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,12 +20,12 @@ public class Book {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private Long asin;   //FIXME: number?
+	private Long asin;
 	private String title;
 	private String author; 
 	private String genre;
 	
-	Book() { // JPA Only
+	public Book() { // JPA Only
 	}
 	
 	public Book withAsin(Long asin){

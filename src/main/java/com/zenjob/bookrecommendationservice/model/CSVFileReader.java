@@ -9,6 +9,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.zenjob.bookrecommendationservice.entity.Book;
+
 import lombok.extern.slf4j.Slf4j;
 
 /**
