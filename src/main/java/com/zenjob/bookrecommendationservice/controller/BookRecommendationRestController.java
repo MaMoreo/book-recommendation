@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.zenjob.bookrecommendationservice.command.UserDTO;
 import com.zenjob.bookrecommendationservice.entity.Feedback;
 import com.zenjob.bookrecommendationservice.entity.User;
 import com.zenjob.bookrecommendationservice.exception.UserNotFoundException;
@@ -84,16 +85,17 @@ public class BookRecommendationRestController {
 	 * @return the created entity if any
 	 */
 	@PostMapping("/users")
-	public ResponseEntity<User> createUser(@RequestBody String userName) {
+	public ResponseEntity<User> createUser(@RequestBody UserDTO userToCreate) {
 
-		User user = userService.createUser(userName);
+		User user = userService.createUser(userToCreate.getName());
 
 		if (user != null) {
 			URI location = ServletUriComponentsBuilder.fromCurrentRequest()
 					// .path("/{id}")
 					.buildAndExpand(user.getId()).toUri();
 
-			return ResponseEntity.created(location).build();
+			//return ResponseEntity.created(location).build();
+			return ResponseEntity.ok(user);
 		}
 
 		return ResponseEntity.badRequest().build();
