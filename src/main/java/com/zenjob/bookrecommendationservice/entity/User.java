@@ -9,9 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-@Entity
 @Data
+@EqualsAndHashCode(exclude = {"recommendations"})
+@Entity
 public class User {
 
 	@Id

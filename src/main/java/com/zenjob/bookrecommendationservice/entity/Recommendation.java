@@ -9,23 +9,26 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-@Entity
 @Data
+@EqualsAndHashCode(exclude = {"user", "book"})
+@Entity
 public class Recommendation {
 
 	@Id
 	@GeneratedValue
 	private Long id;
 
-	@JsonIgnore
+	@JsonIgnore         //Without this it does not work 
 	@ManyToOne
 	@JoinColumn(name = "user_id") 
 	private User user;
 
 	@ManyToOne
 	@JoinColumn(name = "book_id")
-	private Book book;   
+	private Book book; 
+	
 	private Feedback feedback; 
 
 	Recommendation() { // JPA Only

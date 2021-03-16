@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
 		});
 
 		User user = userRepository.save(new User(userName)); // create the user
-		Set<Book> nBooks = bookService.getNBooks(20); // get 20 recommendations
+		Set<Book> nBooks = bookService.getNBooks(2); // FIXME: HARDCODED get 20 recommendations
 
 		Set<Recommendation> recommendations = nBooks
 				.stream()
@@ -59,6 +59,8 @@ public class UserServiceImpl implements UserService {
 						;
 
 		user.setRecommendations(recommendations);
+		//SAVE ?
+		//return userRepository.save(user) ;
 		return user;
 	}
 
