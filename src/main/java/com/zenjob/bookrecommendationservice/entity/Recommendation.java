@@ -34,5 +34,6 @@ public class Recommendation {
 	public Recommendation(User user, Book book) {
 		this.user = user;
 		this.book = book;
+		feedback = Feedback.NO_FEEDBACK;
 	}
 }

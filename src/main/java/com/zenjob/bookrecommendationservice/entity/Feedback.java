@@ -1,5 +1,5 @@
 package com.zenjob.bookrecommendationservice.entity;
 
 public enum Feedback {
-	LIKED, DISLIKED, NOT_INTERESTED;
+	LIKED, DISLIKED, NOT_INTERESTED, NO_FEEDBACK;
 }
