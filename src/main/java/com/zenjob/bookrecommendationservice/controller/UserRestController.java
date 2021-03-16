@@ -1,41 +1,29 @@
 package com.zenjob.bookrecommendationservice.controller;
 
-import java.net.URI;
 import java.util.Collection;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.zenjob.bookrecommendationservice.command.UserDTO;
-import com.zenjob.bookrecommendationservice.entity.Book;
-import com.zenjob.bookrecommendationservice.entity.Feedback;
 import com.zenjob.bookrecommendationservice.entity.User;
 import com.zenjob.bookrecommendationservice.exception.UserNotFoundException;
-import com.zenjob.bookrecommendationservice.service.BookService;
-import com.zenjob.bookrecommendationservice.service.RecommendationService;
 import com.zenjob.bookrecommendationservice.service.UserService;
 
 @RestController
 @RequestMapping("recommendations")
-public class BookRecommendationRestController {
+public class UserRestController {
 
-	private final RecommendationService recommendationService;
 	private final UserService userService;
-	private final BookService bookService;
 
-	public BookRecommendationRestController(RecommendationService recommendationService, UserService userService, BookService bookService) {
+	public UserRestController(UserService userService) {
 		super();
-		this.recommendationService = recommendationService;
 		this.userService = userService;
-		this.bookService = bookService;
 	}
 
 	/**
@@ -49,11 +37,6 @@ public class BookRecommendationRestController {
 	}
 	
 	
-	@GetMapping("/books")
-	public Collection<Book> getAllBooks() {
-		return bookService.getAllBooks();
-	}
-
 	/**
 	 * Version 2: with HATEOAS (Not working)
 	 * 
@@ -90,29 +73,14 @@ public class BookRecommendationRestController {
 		User user = userService.createUser(userToCreate.getName());
 
 		if (user != null) {
-			URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+			/*URI location = ServletUriComponentsBuilder.fromCurrentRequest()
 					// .path("/{id}")
-					.buildAndExpand(user.getId()).toUri();
+					.buildAndExpand(user.getId()).toUri();*/
 
 			//return ResponseEntity.created(location).build();
 			return ResponseEntity.ok(user);
 		}
 
 		return ResponseEntity.badRequest().build();
-	}
-
-	/**
-	 * recommendations/{userName}/{bookId}
-	 * 
-	 * @param userName
-	 * @param bookId
-	 * @param fback
-	 * @return
-	 */
-	@PutMapping("/{userName}/{bookId}")
-	public ResponseEntity<?> giveFeedback(@RequestParam String userName, @RequestParam String bookId,
-			@RequestBody Feedback fback) {
-
-		return ResponseEntity.ok(recommendationService.addFeedback(userName, bookId, fback));
 	}
 }
