@@ -33,4 +33,13 @@ class CsvFileReaderTest {
 		assertNotNull(books);
 		assertEquals(1099, books.size());
 	}
+	
+	@Test
+	void processBooksTestTest() {
+		CSVFileReader fileReader = new CSVFileReader();
+		List<Book> books = fileReader.processBooks("src/test/resources/books_test.csv");
+		assertNotNull(books);
+		assertEquals(2, books.size());
+	}
+	
 }

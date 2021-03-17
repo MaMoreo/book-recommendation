@@ -9,6 +9,9 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+
 import com.zenjob.bookrecommendationservice.entity.Book;
 
 import lombok.extern.slf4j.Slf4j;
@@ -19,36 +22,14 @@ import lombok.extern.slf4j.Slf4j;
  * @author Miguel Moreo
  */
 @Slf4j
+@Configuration
+// @PropertySource("classpath:datasource.properties")
 public class CSVFileReader {
 
 	private static final String SEMICOLON = ";";
-	//private static final Logger LOGGER = Logger.getLogger(CSVFileReader.class.getName());  // use Annotation here!
-	//private static FileHandler fileHandler;
-	private static final String FILE_PATH = "src/main/resources/data/books.csv";   // FIXME: parameter in application properties
+	@Value("${books.filepath:src/main/resources/data/books.csv}") // Spring Language Expression
+	private String FILE_PATH; 
 
-	/**
-	 * Constructor
-	 */
-	/*public CSVFileReader() {
-		// init();
-	}*/
-
-	/**
-	 * Initializes the Logger.
-	 */
-	/*private void init() {
-		try {
-			fileHandler = new FileHandler(".\\logs\\out.log");  // FIXME: does not work
-			LOGGER.addHandler(fileHandler);
-			SimpleFormatter formatter = new SimpleFormatter();
-			fileHandler.setFormatter(formatter);
-		} catch (SecurityException | IOException e) {
-			e.printStackTrace();
-		}
-		LOGGER.setUseParentHandlers(false);
-	}*/
-
-	
 	public List<Book> processBooks() {
 		return processBooks(FILE_PATH);
 	}
@@ -64,7 +45,7 @@ public class CSVFileReader {
 	public List<Book> processBooks(String filePath) {
 		List<Book> books = new ArrayList<>();
 		try (Stream<String> lines = Files.lines(Paths.get(filePath))) {   //reads the whole file
-			books = lines//.sorted()  //FIXME: this is  NOT true, how this works?
+			books = lines
 					.skip(1) //first one is the headers line
 					.map(mapToBook)
 					.collect(Collectors.toList());
@@ -79,13 +60,12 @@ public class CSVFileReader {
 	 * Builds a {@link Book} out of a CSV line.
 	 */
 	private Function<String, Book> mapToBook = (line) -> {
-		String[] p = line.split(SEMICOLON);// CSV has semicolon separated lines
-		Book book = Book.builder()
+		String[] p = line.split(SEMICOLON); // CSV has semicolon separated lines
+		return  Book.builder()
 				.asin(Long.parseLong(p[0]))
 				.title(p[1])
 				.author(p[2])
 				.genre(p[3])
 				.build();
-		return book;
 	};
 }
