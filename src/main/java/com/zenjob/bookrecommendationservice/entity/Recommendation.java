@@ -10,12 +10,16 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(exclude = {"user", "book"})
 @Entity
+@AllArgsConstructor
+@Builder
 public class Recommendation {
 
 	@Id
@@ -42,4 +46,5 @@ public class Recommendation {
 		this.book = book;
 		feedback = Feedback.NO_FEEDBACK;
 	}
+	
 }

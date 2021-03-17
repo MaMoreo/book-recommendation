@@ -10,7 +10,7 @@ public class RecommendationNotFoundException extends RuntimeException{
 	/**
 	 * The recommendation Id was not found for the specified user.
 	 */
-	public RecommendationNotFoundException(String userName, String recommendationId) {
+	public RecommendationNotFoundException(String userName, Long recommendationId) {
 		super("could not find recommendation '" + recommendationId + "' for '" + userName + "'.");
 	}
 

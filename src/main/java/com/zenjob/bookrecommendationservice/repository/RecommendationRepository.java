@@ -25,5 +25,6 @@ public interface RecommendationRepository extends CrudRepository<Recommendation,
 	 */
 	Collection<Recommendation> findByUserUsername(String username);
 	
-	Optional<Recommendation> findByUserUsernameAndBook(String username, String asin);
+	Optional<Recommendation> findByUserUsernameAndBookAsin(String username, String asin);
+	Optional<Recommendation> findByUserUsernameAndBookId(String username, Long bookId);
 }

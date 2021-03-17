@@ -1,5 +1,7 @@
 package com.zenjob.bookrecommendationservice.service;
 
+import java.util.Collection;
+
 import org.springframework.stereotype.Service;
 
 import com.zenjob.bookrecommendationservice.entity.Feedback;
@@ -19,19 +21,23 @@ public class RecommendationServiceImpl implements RecommendationService {
 	}
 
 	@Override
-	public Recommendation addFeedback(String userName, String bookId, Feedback fback) {
+	public Recommendation addFeedback(String userName, Long bookId, Feedback fback) {
 		
 		Recommendation recommendation = recommendationRepository
-				.findByUserUsernameAndBook(userName, bookId)
+				.findByUserUsernameAndBookId(userName, bookId)
 				.orElseThrow(() -> new RecommendationNotFoundException(userName, bookId));
 		
 		recommendation.setFeedback(fback);
-		recommendationRepository.save(recommendation);
-		return recommendation;
+		return recommendationRepository.save(recommendation);
 	}
 
 	@Override
 	public Recommendation createRecommendation(Recommendation recommendation) {
 		return recommendationRepository.save(recommendation);
+	}
+
+	@Override
+	public Collection<Recommendation> findAll() {
+		return (Collection<Recommendation>) recommendationRepository.findAll();
 	}
 }
