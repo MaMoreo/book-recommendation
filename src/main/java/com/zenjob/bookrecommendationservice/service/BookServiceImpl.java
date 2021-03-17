@@ -1,66 +1,61 @@
 package com.zenjob.bookrecommendationservice.service;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
 import com.zenjob.bookrecommendationservice.entity.Book;
 import com.zenjob.bookrecommendationservice.repository.BookRepository;
 
-
 @Service
-public class BookServiceImpl implements BookService{
+public class BookServiceImpl implements BookService {
 
 	private final BookRepository bookRepository;
-	private int totalBooks = 1099;
 
 	public BookServiceImpl(BookRepository bookRepository) {
 		super();
 		this.bookRepository = bookRepository;
 	}
 
+	/**
+	 * Returns N books.
+	 * 
+	 * If the total amount of books in the system is bigger than N
+	 * a Set of random books is returned.
+	 * 
+	 * Otherwise all the books as a Set are returned. (No duplicates)
+	 * 
+	 */
 	@Override
 	public Set<Book> getNBooks(Integer n) {
-		Set<Book> nRandomBooks = new HashSet<>();
-		do {
-			Optional<Book> book = bookRepository.findById(getRandomNumber());
-			if(book.isPresent())
-				nRandomBooks.add(book.get());
-		} while(nRandomBooks.size() < n);
-		
-		return nRandomBooks;
+
+		List<Book> allBooks = (List<Book>) bookRepository.findAll();
+		int totalBooks = allBooks.size();
+
+		if (n < totalBooks) {
+			Set<Book> nRandomBooks = new HashSet<>();
+			do {
+				nRandomBooks.add(allBooks.get(getRandomNumber(totalBooks)));
+			} while (nRandomBooks.size() < n);
+
+			return nRandomBooks;
+		}
+
+		return allBooks.stream().collect(Collectors.toSet());
 	}
 
-	// nextInt is normally exclusive of the top value,  // TODO: check if you can get the last element
-	// so add 1 to make it inclusive
-	private Long getRandomNumber() {
-		return ThreadLocalRandom.current().nextLong(0, totalBooks); //FIXME: this is hardcoded now
+	private int getRandomNumber(int bound) {
+		return ThreadLocalRandom.current().nextInt(0, bound);
 	}
-	
-	/**
-	 * Just a workaround to find a book in the list.
-	 * 
-	 * @param asin
-	 * @return
-	 */
-	/*public Optional<Book> findBookByAsin(Long asin) {
-		return books.stream()
-				//.map(Book::getAsin)
-				.filter(b -> b.equals(asin))
-				.findFirst();
-	}*/
 
+	// FIXME @Cache this
 	@Override
 	public Collection<Book> getAllBooks() {
-		Iterable<Book> all = bookRepository.findAll();
-		List<Book> result = new ArrayList<>();
-		all.forEach(result::add);
-		return result;
+		return (Collection<Book>) bookRepository.findAll();
 	}
 }
