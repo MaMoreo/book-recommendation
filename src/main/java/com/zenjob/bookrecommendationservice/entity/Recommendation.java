@@ -1,6 +1,8 @@
 package com.zenjob.bookrecommendationservice.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -29,6 +31,7 @@ public class Recommendation {
 	@JoinColumn(name = "book_id")
 	private Book book; 
 	
+	@Enumerated(EnumType.STRING)
 	private Feedback feedback; 
 
 	Recommendation() { // JPA Only
