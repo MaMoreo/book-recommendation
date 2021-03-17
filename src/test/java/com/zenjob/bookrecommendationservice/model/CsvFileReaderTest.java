@@ -20,7 +20,7 @@ import com.zenjob.bookrecommendationservice.entity.Book;
 class CsvFileReaderTest {
 
 	// ASIN;Title;Author;Genre
-	private String bookFile = "src/test/resources/books.csv";
+	private String bookFile = "src/test/resources/data/books.csv";
 
 	/**
 	 * Test method for
@@ -37,7 +37,7 @@ class CsvFileReaderTest {
 	@Test
 	void processBooksTestTest() {
 		CSVFileReader fileReader = new CSVFileReader();
-		List<Book> books = fileReader.processBooks("src/test/resources/books_test.csv");
+		List<Book> books = fileReader.processBooks("src/test/resources/data/books_test.csv");
 		assertNotNull(books);
 		assertEquals(2, books.size());
 	}
