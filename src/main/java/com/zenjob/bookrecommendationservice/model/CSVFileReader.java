@@ -80,11 +80,12 @@ public class CSVFileReader {
 	 */
 	private Function<String, Book> mapToBook = (line) -> {
 		String[] p = line.split(SEMICOLON);// CSV has semicolon separated lines
-		Book book = new Book()
-				.withAsin(Long.parseLong(p[0]))   //		book.setAsIN(Integer.parseInt(p[0]));
-				.withTitle(p[1])
-				.withAuthor(p[2])
-				.withGenre(p[3]);
+		Book book = Book.builder()
+				.asin(Long.parseLong(p[0]))
+				.title(p[1])
+				.author(p[2])
+				.genre(p[3])
+				.build();
 		return book;
 	};
 }
