@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.zenjob.bookrecommendationservice.entity.Book;
@@ -15,9 +16,13 @@ import com.zenjob.bookrecommendationservice.entity.User;
 import com.zenjob.bookrecommendationservice.exception.UserDuplicatedException;
 import com.zenjob.bookrecommendationservice.repository.UserRepository;
 
+
 @Service
 public class UserServiceImpl implements UserService {
 
+	@Value("${recommendations.number:20}")
+	private int NUMBER_OF_RECOMMENDATIONS;
+	
 	private final UserRepository userRepository;
 	private final BookService bookService;
 	private final RecommendationService recommendationService;
@@ -50,7 +55,7 @@ public class UserServiceImpl implements UserService {
 		});
 
 		User user = userRepository.save(new User(userName)); // create the user
-		Set<Book> nBooks = bookService.getNBooks(2); // FIXME: HARDCODED get 20 recommendations
+		Set<Book> nBooks = bookService.getNBooks(NUMBER_OF_RECOMMENDATIONS); 
 
 		Set<Recommendation> recommendations = nBooks
 				.stream()
@@ -59,8 +64,6 @@ public class UserServiceImpl implements UserService {
 						;
 
 		user.setRecommendations(recommendations);
-		//SAVE ?
-		//return userRepository.save(user) ;
 		return user;
 	}
 
