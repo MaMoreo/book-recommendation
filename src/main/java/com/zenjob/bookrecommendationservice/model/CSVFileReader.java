@@ -23,7 +23,6 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Configuration
-// @PropertySource("classpath:datasource.properties")
 public class CSVFileReader {
 
 	private static final String SEMICOLON = ";";
