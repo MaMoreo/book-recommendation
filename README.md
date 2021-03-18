@@ -17,12 +17,6 @@ Provide a simple book recommendation service which is usable via a REST API. It 
 
 A suitable dataset for the books is findable alongside this challenge. 
 
-**Process**
-
-    Write down a brief proposal (not more than 1-2 hours) on how you do plan to solve the task. The proposal should clarify the API design, the frameworks/libraries to be used and how the recommendations are generated. If you need to cut stuff a proper solution should have but you are not doing it because it feels out of scope - state that. Show us what the thing should do and where you cut to keep in scope.
-    Send the proposal to us before you start the implementation. We will provide you with feedback so that you can be sure the solution is suitable and your interpretation doesn't get too complicated. We assume you should be able to solve the task in one or two longer afternoons/evenings (6-8 hours maximum). If your plans will take a lot longer to be achieved, consider simplifying. But if you really want to invest more, go for it. (smile)
-    Provide us with a git repository (eg. git init, do your stuff and then send the zip / private hosted repo) which shows us your development process and contains clear steps to quickly execute your app. 
-
 **Resources** - books.csv
 
 The provided book list is a part of the dataset from https://github.com/uchidalab/book-dataset/ and contains 1099 books. Here is the shortcut: https://pastebin.com/rV6HThLv
